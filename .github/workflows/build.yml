@@ -5,7 +5,7 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-    
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -33,7 +33,7 @@ jobs:
       run: mvn test -Dsecure.key="$KEY"
 
     - name: Upload MUnit reports
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v3.1.3
       with:
         name: munit-test-reports
         path: target/site/munit/coverage/
@@ -70,7 +70,7 @@ jobs:
         mv $artifactName1 $artifactName2
 
     - name: Upload artifact 
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v3.1.3
       with:
         name: artifacts
         path: target/*.jar
@@ -90,7 +90,8 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-maven-
 
-    - uses: actions/download-artifact@v3
+    - name: Download artifact
+      uses: actions/download-artifact@v3.0.2
       with:
         name: artifacts
 
